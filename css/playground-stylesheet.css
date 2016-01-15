@@ -1,0 +1,20 @@
+h1 {
+  font-family: Arial, Verdana, sans-serif;
+  text-transform: uppercase;
+}
+
+body {
+  background-image: url("../images/woodenbackground.jpg");
+  /*background-color: #ffff00;*/
+}
+
+#header {
+  border: 5px solid red;
+  background-color: yellow;
+  text-align: center;
+}
+
+#running {
+  font-family: sans-serif;
+  color: red;
+}
