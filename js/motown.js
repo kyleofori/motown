@@ -52,6 +52,18 @@ function init() {
   description.innerHTML = campusMartius.description;
   var choices = document.getElementById('choices');
   choices.innerHTML = campusMartius.question + startArray[3][1] + startArray[3][2];
+  var choices = document.getElementsByClassName('choice');
+  createChoices(choices);
+}
+
+function createChoices(choices) {
+  for(i = 0; i < choices.length; i++) {
+    choices[i].addEventListener('click', update, false);
+    // choices[0].onclick = update; //traditional DOM event handler
+    //We don't have parentheses after the function name (update).
+    //I notice that when I include them, the button no longer works when I click.
+    //Book (JS&jQ, 255) claims that the code would run straight away; doesn't seem to happen.
+  }
 }
 
 function formatQuestion(question) {
@@ -114,12 +126,3 @@ function updateChoices(event) {
     newText = compuware;
   }
 }
-
-
-var choices = document.getElementsByClassName('choice');
-
-choices[0].onclick = update; //traditional DOM event handler
-choices[1].addEventListener('click', update, false); //event listener
-//We don't have parentheses after the function name (update).
-//I notice that when I include them, the button no longer works when I click.
-//Book (JS&jQ, 255) claims that the code would run straight away; doesn't seem to happen.
