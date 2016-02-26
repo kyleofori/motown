@@ -1,9 +1,9 @@
 var startTitle = "Campus Martius Park";
 var startPicture = "images/campusmartius.jpg";
 var startChoiceText = ["Where do you go?", "North.", "South."];
-var startQuestion = "<p>" + startChoiceText[0] + "</p>";
-var startChoice1 = "<input type=\"button\" class=\"choice one\" value=\"" + startChoiceText[1] + "\" />";
-var startChoice2 = "<input type=\"button\" class=\"choice two\" value=\"" + startChoiceText[2] + "\" />";
+var startQuestion = formatQuestion(startChoiceText[0]);
+var startChoice1 = formatChoice("one", startChoiceText[1]);
+var startChoice2 = formatChoice("two", startChoiceText[2]);
 var startChoiceHTML = [startQuestion, startChoice1, startChoice2];
 var sd1 = "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. "
 var sd2 = "\"Where am I?\" you mutter aloud. "
@@ -26,6 +26,16 @@ function init() {
   description.innerHTML = startArray[2];
   var choices = document.getElementById('choices');
   choices.innerHTML = startArray[3][0] + startArray[3][1] + startArray[3][2];
+}
+
+function formatQuestion(question) {
+  formattedQuestion = "<p>" + question + "</p>";
+  return formattedQuestion;
+}
+
+function formatChoice(number, text) {
+  formattedChoice = "<input type=\"button\" class=\"choice " + number + "\" value=\"" + text + "\" />";
+  return formattedChoice;
 }
 
 init();
