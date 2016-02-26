@@ -1,5 +1,3 @@
-var startTitle = "Campus Martius Park";
-var startPicture = "images/campusmartius.jpg";
 var startChoiceText = ["Where do you go?", "North.", "South."];
 var startQuestion = formatQuestion(startChoiceText[0]);
 var startChoice1 = formatChoice("one", startChoiceText[1]);
@@ -7,25 +5,53 @@ var startChoice2 = formatChoice("two", startChoiceText[2]);
 var startChoiceHTML = [startQuestion, startChoice1, startChoice2];
 var sd1 = "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. "
 var sd2 = "\"Where am I?\" you mutter aloud. "
-var sd3 = "\"Campus Martius Park,\" barks a deep male voice from behind you. \"And you can't stay here, either.\" "
+var sd3 = "\"Campus Martius Park,\" barks a deep voice from behind you. \"And you can't stay here, either.\" "
 var sd4 = "To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. "
-var startDescription = "<p>" + sd1 + sd2 + sd3 + "<br />" + sd4;
-var startArray = [startTitle, startPicture, startDescription, startChoiceHTML];
-var riverArray;
-var river = "OK now you're at the river and whatever";
-var compuware = "You are at the Compuware building. (How did you know that?) (It's not called that anymore.)";
-var riverTitle = "Detroit River"
-var compuwareTitle = "One Campus Martius"
+var startDescription = sd1 + sd2 + sd3 + sd4;
+var startArray = ["", "", "", startChoiceHTML];
+
+var campusMartius = {
+  title: "Campus Martius Park",
+  picture: "images/campusmartius.jpg",
+  description: formatQuestion(startDescription),
+  question: formatQuestion(startChoiceText[0]),
+  choices: {
+    directions: ["North.", "South."],
+    places: [compuware, river]
+  }
+};
+
+var compuware = {
+  title: "One Campus Martius (f.k.a. Compuware Building)",
+  picture: "images/compuware.jpg",
+  description: formatQuestion("You are at the Compuware building. (How did you know that?) (It's not called that anymore.)"),
+  question: formatQuestion(startChoiceText[0]),
+  choices: {
+    directions: ["North.", "South."],
+    places: [compuware, campusMartius]
+  }
+};
+
+var river = {
+  title: "Detroit River",
+  picture: "images/hartriverview.jpg",
+  description: formatQuestion("OK now you're at the river and whatever"),
+  question: formatQuestion(startChoiceText[0]),
+  choices: {
+    directions: ["North.", "South."],
+    places: [campusMartius, river]
+  }
+};
 
 function init() {
   var title = document.getElementsByTagName('h1');
-  title[0].innerHTML = startArray[0];
+  title[0].innerHTML = campusMartius.title;
   var picture = document.getElementById('headerImage');
-  picture.src = startArray[1];
+  picture.src = campusMartius.picture;
   var description = document.getElementById('description');
-  description.innerHTML = startArray[2];
+  description.innerHTML = campusMartius.description;
   var choices = document.getElementById('choices');
-  choices.innerHTML = startArray[3][0] + startArray[3][1] + startArray[3][2];
+  choices.innerHTML = campusMartius.question + startArray[3][1] + startArray[3][2];
 }
 
 function formatQuestion(question) {
@@ -50,18 +76,18 @@ function update(event) {
 function updateTitle(event) {
   var title = document.getElementsByTagName('h1');
   if(event.target.className == 'choice two') {
-    title[0].innerHTML = riverTitle;
+    title[0].innerHTML = river.title;
   } else {
-    title[0].innerHTML = compuwareTitle;
+    title[0].innerHTML = compuware.title;
   }
 }
 
 function updatePicture(event) {
   var picture = document.getElementById('headerImage');
   if(event.target.className == 'choice two') {
-    picture.src = "images/hartriverview.jpg";
+    picture.src = river.picture;
   } else {
-    picture.src = "images/compuware.jpg";
+    picture.src = compuware.picture;
     }
 }
 
@@ -71,9 +97,9 @@ function updateDescription(event) {
   console.log("This is the event " + event.target.className);
   var newText = "default text";
   if(event.target.className == 'choice two') {
-    newText = river;
+    newText = river.description;
   } else {
-    newText = compuware;
+    newText = compuware.description;
   }
   console.log(newText);
   description.innerHTML = '<p>' + newText + '</p>';
