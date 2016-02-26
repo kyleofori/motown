@@ -1,15 +1,17 @@
 var startTitle = "Campus Martius Park";
 var startPicture = "images/campusmartius.jpg";
-var startChoices = ["Where do you go?", "North.", "South."];
-var startQuestion = "<p>" + startChoices[0] + "</p>";
-var startChoice1 = "<input type=\"button\" class=\"choice one\" value=\"North.\" />"
-var startChoice2 = "<input type=\"button\" class=\"choice two\" value=\"South.\" />"
+var startChoiceText = ["Where do you go?", "North.", "South."];
+var startQuestion = "<p>" + startChoiceText[0] + "</p>";
+var startChoice1 = "<input type=\"button\" class=\"choice one\" value=\"" + startChoiceText[1] + "\" />";
+var startChoice2 = "<input type=\"button\" class=\"choice two\" value=\"" + startChoiceText[2] + "\" />";
+var startChoiceHTML = [startQuestion, startChoice1, startChoice2];
 var sd1 = "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. "
 var sd2 = "\"Where am I?\" you mutter aloud. "
 var sd3 = "\"Campus Martius Park,\" barks a deep male voice from behind you. \"And you can't stay here, either.\" "
 var sd4 = "To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. "
 var startDescription = "<p>" + sd1 + sd2 + sd3 + "<br />" + sd4;
-var startArray = [startTitle, startPicture, startDescription, startChoices];
+var startArray = [startTitle, startPicture, startDescription, startChoiceHTML];
+var riverArray;
 var river = "OK now you're at the river and whatever";
 var compuware = "You are at the Compuware building. (How did you know that?) (It's not called that anymore.)";
 var riverTitle = "Detroit River"
@@ -17,19 +19,13 @@ var compuwareTitle = "One Campus Martius"
 
 function init() {
   var title = document.getElementsByTagName('h1');
-  title[0].innerHTML = startTitle;
+  title[0].innerHTML = startArray[0];
   var picture = document.getElementById('headerImage');
-  picture.src = startPicture;
+  picture.src = startArray[1];
   var description = document.getElementById('description');
-  description.innerHTML = startDescription;
+  description.innerHTML = startArray[2];
   var choices = document.getElementById('choices');
-  console.log("choices is " + choices);
-  console.log("choices' first child is " + choices.firstChild);
-  console.log("choices' innerHTML is " + choices.innerHTML);
-  choices.innerHTML = startQuestion + startChoice1 + startChoice2;
-  console.log("choices is " + choices);
-  console.log("choices' first child is " + choices.firstChild);
-  console.log("choices' innerHTML is " + choices.innerHTML);
+  choices.innerHTML = startArray[3][0] + startArray[3][1] + startArray[3][2];
 }
 
 init();
