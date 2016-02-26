@@ -44,8 +44,7 @@ var river = {
 };
 
 function init() {
-  var title = document.getElementsByTagName('h1');
-  title[0].innerHTML = campusMartius.title;
+  setTitle(campusMartius);
   var picture = document.getElementById('headerImage');
   picture.src = campusMartius.picture;
   var description = document.getElementById('description');
@@ -54,6 +53,11 @@ function init() {
   choices.innerHTML = campusMartius.question + startArray[3][1] + startArray[3][2];
   var choices = document.getElementsByClassName('choice');
   createChoices(choices);
+}
+
+function setTitle(place) {
+  var title = document.getElementsByTagName('h1');
+  title[0].innerHTML = place.title;
 }
 
 function createChoices(choices) {
