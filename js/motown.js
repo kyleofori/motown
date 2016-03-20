@@ -1,6 +1,3 @@
-var startChoice1 = formatChoice("one", "NORTH");
-var startChoice2 = formatChoice("two", "SOUTH");
-
 function formatText(question) {
   formattedQuestion = "<p>" + question + "</p>";
   return formattedQuestion;
@@ -17,8 +14,8 @@ var campusMartius = {
   description: "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. \"Where am I?\" you mutter aloud. \"Campus Martius Park,\" barks a deep voice from behind you. \"And you can't stay here, either.\" To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. ",
   question: "Where do you go?",
   choices: {
-    directions: ["North.", "South."],
-    places: [compuware, river]
+    north: compuware,
+    south: river
   }
 };
 
@@ -28,8 +25,7 @@ var compuware = {
   description: "You are at the Compuware building. (How did you know that?) (It's not called that anymore.)",
   question: "Who you gonna call?",
   choices: {
-    directions: ["North.", "South."],
-    places: [compuware, campusMartius]
+    south: campusMartius
   }
 };
 
@@ -39,8 +35,7 @@ var river = {
   description: "OK now you're at the river and whatever",
   question: "What you gonna do?",
   choices: {
-    directions: ["North.", "South."],
-    places: [campusMartius, river]
+    north: campusMartius
   }
 };
 
@@ -50,8 +45,7 @@ function init() {
   setDescription(campusMartius);
   setQuestion(campusMartius);
   setChoices(campusMartius);
-  var choices = document.getElementsByClassName('choice');
-  createChoices(choices);
+  createChoices(document.getElementsByClassName('choice'));
 }
 
 function setTitle(place) {
@@ -74,6 +68,9 @@ function setQuestion(place) {
   question.innerHTML = formatText(place.question);
 }
 
+var startChoice1 = formatChoice("one", "NORTH");
+var startChoice2 = formatChoice("two", "SOUTH");
+
 function setChoices(place) {
   var choices = document.getElementById('choices');
   choices.innerHTML = startChoice1 + startChoice2;
@@ -82,7 +79,7 @@ function setChoices(place) {
 function createChoices(choices) {
   for(i = 0; i < choices.length; i++) {
     choices[i].addEventListener('click', update, false);
-    // choices[0].onclick = update; //traditional DOM event handler
+    // choices[i].onclick = update; //traditional DOM event handler
     //We don't have parentheses after the function name (update).
     //I notice that when I include them, the button no longer works when I click.
     //Book (JS&jQ, 255) claims that the code would run straight away; doesn't seem to happen.
@@ -118,15 +115,12 @@ function updatePicture(event) {
 
 function updateDescription(event) {
   var description = document.getElementById('description');
-  console.log(description);
-  console.log("This is the event " + event.target.className);
   var newText = "default text";
   if(event.target.className == 'choice two') {
     newText = river.description;
   } else {
     newText = compuware.description;
   }
-  console.log(newText);
   description.innerHTML = '<p>' + newText + '</p>';
 }
 
