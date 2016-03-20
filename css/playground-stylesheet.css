@@ -1,7 +1,19 @@
 h1 {
-  font-family: Arial, Verdana, sans-serif;
+  font-family: cursive;
   text-transform: uppercase;
 }
+
+/*Test the last rule by just adding the following rule*/
+/*h1 {
+  text-transform:lowercase;
+}*/
+
+/*Test the specificity rule by just adding the following rule*/
+#headerTitle {
+  text-transform: lowercase;
+}
+
+
 
 body {
   background-image: url("../images/detroit3_18x24.jpg");
