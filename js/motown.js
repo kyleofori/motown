@@ -3,11 +3,6 @@ function formatText(question) {
   return formattedQuestion;
 }
 
-function formatChoice(number, text) {
-  formattedChoice = "<input type=\"button\" class=\"choice " + number + "\" value=\"" + text + "\" />";
-  return formattedChoice;
-}
-
 var campusMartius = {
   title: "Campus Martius Park",
   picture: "images/campusmartius.jpg",
@@ -71,6 +66,11 @@ function setQuestion(place) {
 var startChoice1 = formatChoice("one", "NORTH");
 var startChoice2 = formatChoice("two", "SOUTH");
 
+function formatChoice(number, text) {
+  formattedChoice = "<input type=\"button\" class=\"choice " + number + "\" value=\"" + text + "\" />";
+  return formattedChoice;
+}
+
 function setChoices(place) {
   var choices = document.getElementById('choices');
   choices.innerHTML = startChoice1 + startChoice2;
@@ -88,12 +88,16 @@ function createChoices(choices) {
 
 init();
 
+//LEARN HOW TO PASS A PARAMETER INTO UPDATE.
+//THEN, DELETE THE METHODS BELOW AND FIX THEM.
+
 function update(event) {
   updateTitle(event);
   updatePicture(event);
   updateDescription(event);
   updateChoices(event);
 }
+
 
 function updateTitle(event) {
   var title = document.getElementsByTagName('h1');
