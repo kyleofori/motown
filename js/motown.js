@@ -1,20 +1,5 @@
-function formatText(question) {
-  formattedQuestion = "<p>" + question + "</p>";
-  return formattedQuestion;
-}
-
-var campusMartius = {
-  title: "Campus Martius Park",
-  picture: "images/campusmartius.jpg",
-  description: "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. \"Where am I?\" you mutter aloud. \"Campus Martius Park,\" barks a deep voice from behind you. \"And you can't stay here, either.\" To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. ",
-  question: "Where do you go?",
-  choices: {
-    north: compuware,
-    south: river
-  }
-};
-
 var compuware = {
+  name: "compuware",
   title: "One Campus Martius (f.k.a. Compuware Building)",
   picture: "images/compuware.jpg",
   description: "You are at the Compuware building. (How did you know that?) (It's not called that anymore.)",
@@ -25,6 +10,7 @@ var compuware = {
 };
 
 var river = {
+  name: "river",
   title: "Detroit River",
   picture: "images/hartriverview.jpg",
   description: "OK now you're at the river and whatever",
@@ -34,13 +20,26 @@ var river = {
   }
 };
 
-function init() {
-  setTitle(campusMartius);
-  setPicture(campusMartius);
-  setDescription(campusMartius);
-  setQuestion(campusMartius);
-  setChoices(campusMartius);
-  createChoices(document.getElementsByClassName('choice'));
+var campusMartius = {
+  name: "campusMartius",
+  title: "Campus Martius Park",
+  picture: "images/campusmartius.jpg",
+  description: "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. \"Where am I?\" you mutter aloud. \"Campus Martius Park,\" barks a deep voice from behind you. \"And you can't stay here, either.\" To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. ",
+  question: "Where do you go?",
+  choices: {
+    north: compuware,
+    south: river
+  }
+};
+
+initPage(campusMartius);
+
+function initPage(place) {
+  setTitle(place);
+  setPicture(place);
+  setDescription(place);
+  setQuestion(place);
+  setChoices(place);
 }
 
 function setTitle(place) {
@@ -63,77 +62,21 @@ function setQuestion(place) {
   question.innerHTML = formatText(place.question);
 }
 
-var startChoice1 = formatChoice("one", "NORTH");
-var startChoice2 = formatChoice("two", "SOUTH");
-
-function formatChoice(number, text) {
-  formattedChoice = "<input type=\"button\" class=\"choice " + number + "\" value=\"" + text + "\" />";
-  return formattedChoice;
-}
-
 function setChoices(place) {
   var choices = document.getElementById('choices');
-  choices.innerHTML = startChoice1 + startChoice2;
+  choices.innerHTML = formatButtons(place.choices);
 }
 
-function createChoices(choices) {
-  for(i = 0; i < choices.length; i++) {
-    choices[i].addEventListener('click', update, false);
-    // choices[i].onclick = update; //traditional DOM event handler
-    //We don't have parentheses after the function name (update).
-    //I notice that when I include them, the button no longer works when I click.
-    //Book (JS&jQ, 255) claims that the code would run straight away; doesn't seem to happen.
+function formatText(text) {
+  formattedText = "<p>" + text + "</p>";
+  return formattedText;
+}
+
+function formatButtons(choices) {
+  var buttonsCode = "";
+  for(direction in choices) {
+    console.log(choices[direction]);
+    buttonsCode = buttonsCode.concat("<button onclick='initPage(" + choices[direction].name + ")'>" + direction + "</button>");
   }
-}
-
-init();
-
-//LEARN HOW TO PASS A PARAMETER INTO UPDATE.
-//THEN, DELETE THE METHODS BELOW AND FIX THEM.
-
-function update(event) {
-  updateTitle(event);
-  updatePicture(event);
-  updateDescription(event);
-  updateChoices(event);
-}
-
-
-function updateTitle(event) {
-  var title = document.getElementsByTagName('h1');
-  if(event.target.className == 'choice two') {
-    title[0].innerHTML = river.title;
-  } else {
-    title[0].innerHTML = compuware.title;
-  }
-}
-
-function updatePicture(event) {
-  var picture = document.getElementById('headerImage');
-  if(event.target.className == 'choice two') {
-    picture.src = river.picture;
-  } else {
-    picture.src = compuware.picture;
-    }
-}
-
-function updateDescription(event) {
-  var description = document.getElementById('description');
-  var newText = "default text";
-  if(event.target.className == 'choice two') {
-    newText = river.description;
-  } else {
-    newText = compuware.description;
-  }
-  description.innerHTML = '<p>' + newText + '</p>';
-}
-
-function updateChoices(event) {
-  var choice = ["Whatcha gonna do?", "One", "Two", "Three", "Four"];
-  var question = document.getElementById('question');
-  if(event.target.className == 'choice two') {
-    question = choice[0];
-  } else {
-    newText = compuware;
-  }
+  return buttonsCode;
 }
