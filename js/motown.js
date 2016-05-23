@@ -4,9 +4,7 @@ var compuware = {
   picture: "images/compuware.jpg",
   description: "You are at the Compuware building. (How did you know that?) (It's not called that anymore.)",
   question: "Who you gonna call?",
-  choices: {
-    south: campusMartius
-  }
+  choices: ["south-campusMartius"]
 };
 
 var river = {
@@ -15,9 +13,7 @@ var river = {
   picture: "images/hartriverview.jpg",
   description: "OK now you're at the river and whatever",
   question: "What you gonna do?",
-  choices: {
-    north: campusMartius
-  }
+  choices: ["north-campusMartius"]
 };
 
 var campusMartius = {
@@ -26,10 +22,7 @@ var campusMartius = {
   picture: "images/campusmartius.jpg",
   description: "You wake up on a tiny beach surrounded by skyscrapers. Your head is pounding, and you have no idea what is going on. \"Where am I?\" you mutter aloud. \"Campus Martius Park,\" barks a deep voice from behind you. \"And you can't stay here, either.\" To the south, you see a lot of construction on the road; to the north, there's a funky looking wide building that seems to take up the whole block. ",
   question: "Where do you go?",
-  choices: {
-    north: compuware,
-    south: river
-  }
+  choices: ["north-compuware", "south-river"]
 };
 
 initPage(campusMartius);
@@ -63,8 +56,8 @@ function setQuestion(place) {
 }
 
 function setChoices(place) {
-  var choices = document.getElementById('choices');
-  choices.innerHTML = formatButtons(place.choices);
+  var dirButtons = document.getElementById('dirButtons');
+  dirButtons.innerHTML = formatButtons(place.choices);
 }
 
 function formatText(text) {
@@ -73,10 +66,12 @@ function formatText(text) {
 }
 
 function formatButtons(choices) {
-  var buttonsCode = "";
-  for(direction in choices) {
-    console.log(choices[direction]);
-    buttonsCode = buttonsCode.concat("<button onclick='initPage(" + choices[direction].name + ")'>" + direction + "</button>");
+  var toReturn = "";
+  for(let i = 0; i < choices.length; i++) {
+    var direction = choices[i].split("-");
+    var directionText = direction[0];
+    var directionPlace = direction[1];
+    toReturn = toReturn.concat("<button onclick='initPage(" + directionPlace + ")'>"+directionText+"</button>");
   }
-  return buttonsCode;
+  return toReturn;
 }
