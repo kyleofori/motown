@@ -1,3 +1,5 @@
+var userName = prompt("What is your name, traveler?", "Traveler");
+
 var compuware = {
   name: "compuware",
   title: "One Campus Martius (f.k.a. Compuware Building)",
@@ -19,7 +21,7 @@ var river = {
   name: "river",
   title: "Detroit River",
   picture: "images/hartriverview.jpg",
-  description: "You are now at the river. While you are looking across the water, you hear a disembodied voice saying 'Hop in, traveler. I can assure you safe passage south, to Windsor.' You look down, and notice a small brown boat sitting in the water, about five feet below you.",
+  description: "You are now at the river. While you are looking across the water, you hear a disembodied voice saying 'Hop in, " + userName + ". I can assure you safe passage south, to Windsor.' You look down, and notice a small brown boat sitting in the water, about five feet below you.",
   question: "What do you do?",
   choices: ["north-campusMartius", "south-boat"]
 };
@@ -64,12 +66,8 @@ startPage();
 initPage(campusMartius);
 
 function startPage() {
-  var userName = prompt("What is your name, traveler?", "traveler");
   if (userName !== null) {
-    titleArea = document.getElementById('titleArea');
-    console.log(titleArea);
-    gameTitle = titleArea.getElementsByClassName('gameTitle');
-    console.log(gameTitle);
+    gameTitle = document.getElementsByClassName('gameTitle');
     gameTitle[0].innerHTML = userName + "'s " + gameTitle[0].innerHTML;
   }
 }
@@ -83,12 +81,12 @@ function initPage(place) {
 }
 
 function setTitle(place) {
-  var title = document.getElementsByTagName('h1');
-  title[0].innerHTML = place.title;
+  var title = document.getElementById('levelTitle');
+  title.innerHTML = place.title;
 }
 
 function setPicture(place) {
-  var picture = document.getElementById('headerImage');
+  var picture = document.getElementById('levelImage');
   picture.src = place.picture;
 }
 
@@ -102,30 +100,31 @@ function setQuestion(place) {
   question.innerHTML = formatText(place.question);
 }
 
+function formatTheButtons(div, choicess) {
+  div.innerHTML = "";
+  if(choicess !== undefined) {
+    for (let i = 0; i < choicess.length; i++) {
+      let choiceButton = document.createElement("input");
+      choiceButton.type = "button";
+      var direction = choicess[i].split("-");
+      var directionText = direction[0];
+      var directionPlace = direction[1];
+      choiceButton.value = directionText;
+      let directionPlaceObject = this[directionPlace];
+      choiceButton.addEventListener("click", function() {
+        initPage(directionPlaceObject);
+      }, false);
+      div.appendChild(choiceButton);
+    }
+  }
+}
+
 function setChoices(place) {
   var dirButtons = document.getElementById('dirButtons');
-  dirButtons.innerHTML = formatButtons(place.choices);
+  formatTheButtons(dirButtons, place.choices);
 }
 
 function formatText(text) {
   formattedText = "<p>" + text + "</p>";
   return formattedText;
-}
-
-
-function isRealValue(object) {
-  return object && object !== "null" && object !== "undefined";
-}
-
-function formatButtons(choices) {
-  var toReturn = "";
-  if(choices !== undefined) {
-    for(let i = 0; i < choices.length; i++) {
-      var direction = choices[i].split("-");
-      var directionText = direction[0];
-      var directionPlace = direction[1];
-      toReturn = toReturn.concat("<button onclick='initPage(" + directionPlace + ")'>"+directionText+"</button>");
-    }
-  }
-    return toReturn;
 }

@@ -1,27 +1,13 @@
-h1 {
-  font-family: cursive;
-  text-transform: uppercase;
+h1-h6 {
+  font-style: bold;
 }
-
-/*Test the last rule by just adding the following rule*/
-/*h1 {
-  text-transform:lowercase;
-}*/
-
-/*Test the specificity rule by just adding the following rule*/
-#headerTitle {
-  text-transform: lowercase;
-}
-
-
 
 body {
   background-image: url("../images/detroit3_18x24.jpg");
-  /*background-color: #ffff00;*/
+  font-family: 'Bitter', serif;
 }
 
 p {
-  font-family: sans-serif;
   font-size: 20pt;
   color: black;
 }
@@ -31,16 +17,11 @@ img.medium {
   height: 300px;
 }
 
-#titleArea, #header, #description, #question, #dirButtons {
+#header, #description, #question, #dirButtons {
   text-align: center;
 }
 
-#direction {
-  font-size: 100pt;
-  color: red;
-}
-
-#headerImage {
+#levelImage {
   border: 10px solid black;
 }
 
