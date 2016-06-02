@@ -100,13 +100,13 @@ function setQuestion(place) {
   question.innerHTML = formatText(place.question);
 }
 
-function formatTheButtons(div, choicess) {
+function formatTheButtons(div, choices) {
   div.innerHTML = "";
-  if(choicess !== undefined) {
-    for (let i = 0; i < choicess.length; i++) {
+  if(choices !== undefined) {
+    for (let i = 0; i < choices.length; i++) {
       let choiceButton = document.createElement("input");
       choiceButton.type = "button";
-      var direction = choicess[i].split("-");
+      var direction = choices[i].split("-");
       var directionText = direction[0];
       var directionPlace = direction[1];
       choiceButton.value = directionText;
