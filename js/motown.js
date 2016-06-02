@@ -47,7 +47,7 @@ var boat = {
 var shark = {
   name: "shark",
   title: "You Meet Your End In A Shark's Maw",
-  picture: "images/boat.jpg",
+  picture: "images/shark.jpeg",
   description: "You shout for help. No one hears you. You put your hand in the water, not realizing that you have cut your finger during this journey until the saltwater stings your knuckles. Guess who else realized you were bleeding? The only shark in the Detroit River. Things do not end well.",
   question: "THE END.",
   choices: undefined
@@ -56,7 +56,7 @@ var shark = {
 var wateryEnd = {
   name: "wateryEnd",
   title: "You Meet Your End In A Boat",
-  picture: "images/boat.jpg",
+  picture: "images/capsized_boat2.jpg",
   description: "Have you ever read \"The Life of Pi\", or seen the movie? Your story is a bit like that, except there's no tiger, and you never make it back home.",
   question: "THE END.",
   choices: undefined
