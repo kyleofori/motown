@@ -31,13 +31,22 @@ img.medium {
   height: 300px;
 }
 
+#titleArea, #header, #description, #question, #dirButtons {
+  text-align: center;
+}
+
 #direction {
   font-size: 100pt;
   color: red;
 }
 
-#header {
+#headerImage {
+  border: 10px solid black;
+}
+
+#description {
   border: 5px solid gray;
   background-color: #cccccc;
-  text-align: center;
+  width: 900px;
+  margin: 0 auto;
 }
